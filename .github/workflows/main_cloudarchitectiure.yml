@@ -15,8 +15,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
+      - name: List directory contents for debugging
+        run: ls -la
+
       - name: Zip artifact for deployment
-        run: zip -r release.zip .website/* 
+        run: zip -r release.zip .website
 
       - name: Login to Azure
         uses: azure/login@v2
