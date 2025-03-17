@@ -19,7 +19,11 @@ jobs:
         run: ls -la
 
       - name: Zip artifact for deployment
-        run: zip -r release.zip .website
+        run: |
+          # First verify the directory exists
+          ls -la
+          # Then create the zip with correct syntax
+          zip -r release.zip ./website
 
       - name: Login to Azure
         uses: azure/login@v2
