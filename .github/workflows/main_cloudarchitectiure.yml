@@ -11,19 +11,20 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      id-token: write  # Required for azure/login@v2
 
     steps:
       - uses: actions/checkout@v4
-      
-      - name: List directory contents for debugging
-        run: ls -la
+
+      - name: Enhanced directory listing for debugging
+        run: |
+          echo "Root directory contents:"
+          ls -la
 
       - name: Zip artifact for deployment
         run: |
-          # First verify the directory exists
-          ls -la
-          # Then create the zip with correct syntax
-          zip -r release.zip ./website
+          # The directory name in your repo has a leading dot
+          zip -r release.zip .website
 
       - name: Login to Azure
         uses: azure/login@v2
